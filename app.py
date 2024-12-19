@@ -10,12 +10,14 @@ print("PyTorch Version:", torch.__version__)
 print("CUDA Available:", torch.cuda.is_available())
 
 # Load a pre-trained model
-model_name = "distilgpt2"  # Lightweight model for testing
+model_name = "EleutherAI/gpt-j-6B"  # Lightweight model for testing: gpt2
 tokenizer = AutoTokenizer.from_pretrained(model_name)
 model = AutoModelForCausalLM.from_pretrained(model_name)
 
 # Define a pipeline
 generator = pipeline("text-generation", model=model, tokenizer=tokenizer)
+
+print(generator("Hello", max_length=50, num_return_sequences=1)) #to check if response
 
 # Conversation function
 def conversation(prompt, history=None):
